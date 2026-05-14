@@ -24,6 +24,7 @@
 ---
 
 ## How it works
+<img width="1103" height="323" alt="image" src="https://github.com/user-attachments/assets/49b9b5da-2007-4377-9b14-32c11c99b5a7" />
 
 A small Go binary serves a local web UI on a random port and embeds it in a Chrome app window. When the window closes, the Go process shuts down — no background services, no tray icons, nothing left running.
 
