@@ -1,4 +1,4 @@
-# NinjaOne Software Lookup
+<img width="833" height="347" alt="image" src="https://github.com/user-attachments/assets/f9885ea5-9479-4db9-93f2-44467639b5c8" />
 
 A fast, focused desktop tool for pulling a device's installed software list out of NinjaOne. Search, filter, sort, and paste a clean inventory table into a ticket, email, or document in seconds.
 
@@ -142,5 +142,6 @@ The Windows build script produces `NinjaSoftwareLookup.exe` in the repo root and
 ---
 
 ## License
+
 
 [MIT](LICENSE)
