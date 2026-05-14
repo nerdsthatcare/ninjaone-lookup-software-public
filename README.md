@@ -18,7 +18,8 @@
 - 🌗 **Light & dark themes** — liquid-glass interface with brand-orange accents
 - ⌨️ **Keyboard-friendly** — `Ctrl+K` to search, `/` to filter, `Esc` to dismiss
   
-<img width="1108" height="820" alt="image" src="https://github.com/user-attachments/assets/546b18cb-5359-46cc-a4ba-a443c63284bf" />
+<img width="1066" height="679" alt="image" src="https://github.com/user-attachments/assets/a36c5318-ccda-4b7a-8148-2760bb5cf66f" />
+
 
 ---
 
