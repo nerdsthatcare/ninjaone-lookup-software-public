@@ -76,6 +76,7 @@ Credentials are stored locally in your user profile — the browser front-end ne
 5. Export to CSV, or click **Copy as HTML** and paste into a ticket, email, or document
 
 ### Keyboard shortcuts
+<img width="1105" height="263" alt="image" src="https://github.com/user-attachments/assets/ef95dcfa-d027-45ac-9acf-9c09178b9e6c" />
 
 | Action | Shortcut |
 |---|---|
