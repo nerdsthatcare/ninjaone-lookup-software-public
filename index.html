@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>NinjaOne Software Lookup</title>
+<!-- Tints the OS title bar in Chrome/Edge --app mode so it blends into our
+     header (light = brand orange, dark = deep orange). Updated at runtime
+     when the theme toggles. -->
+<meta id="themeColor" name="theme-color" content="#F26A21" />
+<link rel="icon" type="image/png" href="/logo.png" />
+<link rel="stylesheet" href="/app.css" />
+</head>
+<body>
+<div class="bg-decor" aria-hidden="true">
+  <span class="orb orb-1"></span>
+  <span class="orb orb-2"></span>
+  <span class="orb orb-3"></span>
+</div>
+
+<header class="appbar" role="banner">
+  <div class="appbar-inner">
+    <div class="brand">
+      <div class="logo-wrap"><img class="logo" src="/logo.png" alt="" /></div>
+      <div class="brand-text">
+        <h1>NinjaOne Software Lookup</h1>
+        <span class="brand-sub">Device Software Inventory</span>
+      </div>
+    </div>
+    <div class="appbar-actions">
+      <button id="themeBtn" class="icon-btn appbar-btn" title="Toggle theme" aria-label="Toggle theme">
+        <svg class="icon-sun"  viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button id="settingsBtn" class="btn appbar-btn">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span>Settings</span>
+      </button>
+    </div>
+  </div>
+  <div class="appbar-sheen" aria-hidden="true"></div>
+</header>
+
+<main>
+  <nav class="tabs" role="tablist" aria-label="Views">
+    <div class="tabs-inner glass">
+      <button class="tab tab-active" data-view="lookup" role="tab" aria-selected="true" type="button">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Lookup</span>
+      </button>
+      <button class="tab" data-view="help" role="tab" aria-selected="false" type="button">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.5-2.5 2-2.5 3.5"/><line x1="12" y1="16.5" x2="12" y2="16.51"/></svg>
+        <span>Help</span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="view" data-view="lookup">
+  <section class="searchbar glass">
+    <div class="input-wrap">
+      <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="query" type="text" placeholder="Search by device name or NinjaOne ID..." autocomplete="off" />
+      <button id="recentBtn" class="recent-trigger" type="button" title="Recent devices" aria-label="Recent devices">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+      </button>
+      <div id="recentMenu" class="recent-menu hidden" role="menu"></div>
+    </div>
+    <button id="searchBtn" class="btn btn-primary">Search</button>
+    <button id="refreshBtn" class="btn btn-glass" disabled title="Re-run the last search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+      <span>Refresh</span>
+    </button>
+    <button id="hideMsBtn" class="btn btn-glass" title="Hide first-party Microsoft software">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg>
+      <span>Hide Microsoft</span>
+    </button>
+    <button id="exportBtn" class="btn btn-ghost" disabled>
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span>Export CSV</span>
+    </button>
+    <button id="copyHtmlBtn" class="btn btn-ghost" disabled title="Copy a formatted HTML table to the clipboard">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span>Copy as HTML</span>
+    </button>
+  </section>
+
+  <section id="deviceCard" class="device-card glass hidden" aria-live="polite">
+    <div class="device-card-head">
+      <div class="device-name-wrap">
+        <h2 id="deviceName" class="device-name"></h2>
+        <span id="deviceStatus" class="device-status"></span>
+      </div>
+      <div class="device-id-line">
+        <span class="device-id-label">ID</span>
+        <a id="deviceId" class="device-id-value" target="_blank" rel="noopener noreferrer" title="Open in NinjaOne">
+          <span id="deviceIdText"></span>
+          <svg class="ext-icon" viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7"/><path d="M10 14L21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+        </a>
+      </div>
+    </div>
+    <div id="deviceFacts" class="device-facts"></div>
+  </section>
+
+  <section class="filter-row hidden" id="filterRow">
+    <div class="input-wrap filter-wrap">
+      <svg class="input-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+      <input id="filter" type="text" placeholder="Filter loaded software..." autocomplete="off" />
+      <button id="filterClear" class="filter-clear hidden" type="button" aria-label="Clear filter">×</button>
+    </div>
+    <span id="filterCount" class="filter-count"></span>
+  </section>
+
+  <section class="table-wrap glass">
+    <table id="results">
+      <thead>
+        <tr>
+          <th data-sort="name">Software</th>
+          <th data-sort="version">Version</th>
+          <th data-sort="publisher">Publisher</th>
+          <th data-sort="installDate">Installed</th>
+          <th data-sort="size">Size (MB)</th>
+        </tr>
+      </thead>
+      <tbody><tr class="empty"><td colspan="5">No results yet. Enter a device name or ID and click Search.</td></tr></tbody>
+    </table>
+  </section>
+  </div>
+
+  <div class="view hidden" data-view="help">
+    <section class="help-hero glass">
+      <div class="help-hero-logo"><img src="/logo.png" alt="" /></div>
+      <div class="help-hero-text">
+        <h2>NinjaOne Software Lookup</h2>
+        <p>Search any NinjaOne-managed device. See every installed application — live, on demand. No spreadsheets, no stale exports.</p>
+        <div class="help-pills">
+          <span class="help-pill">Live NinjaOne API</span>
+          <span class="help-pill">Sort &amp; filter</span>
+          <span class="help-pill">CSV / HTML export</span>
+          <span class="help-pill">Local credentials</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="help-section">
+      <h3 class="help-h">What it does</h3>
+      <div class="help-grid">
+        <div class="help-card glass">
+          <div class="help-card-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+          <h4>Live software inventory</h4>
+          <p>Pulls directly from NinjaOne every time. Always reflects what's installed right now — never a cached snapshot.</p>
+        </div>
+        <div class="help-card glass">
+          <div class="help-card-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <h4>Search by name or ID</h4>
+          <p>Type a device name, hostname, or NinjaOne numeric ID. Recent searches stay one click away.</p>
+        </div>
+        <div class="help-card glass">
+          <div class="help-card-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></div>
+          <h4>Filter &amp; sort</h4>
+          <p>Click any column to sort. Filter loaded software by name, publisher, or version. Hide first-party Microsoft components with one click.</p>
+        </div>
+        <div class="help-card glass">
+          <div class="help-card-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+          <h4>Export anywhere</h4>
+          <p>Save the visible list as CSV, or copy a formatted HTML table straight to your clipboard for ticket notes or documents.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="help-section">
+      <h3 class="help-h">How to use it</h3>
+      <ol class="help-steps">
+        <li>
+          <span class="help-step-num">1</span>
+          <div class="help-step-body">
+            <h4>Create a NinjaOne API app</h4>
+            <p>In NinjaOne, go to <strong>Administration → Apps → API → Add</strong>. Set <strong>Application Platform</strong> to <em>API Services (machine-to-machine)</em>, <strong>Grant Type</strong> to <em>Client Credentials</em>, and add the <em>monitoring</em> scope. Save and copy the generated <strong>Client ID</strong> and <strong>Client Secret</strong>.</p>
+          </div>
+        </li>
+        <li>
+          <span class="help-step-num">2</span>
+          <div class="help-step-body">
+            <h4>Add your credentials to the app</h4>
+            <p>Click <strong>Settings</strong> in the top-right. Pick the NinjaOne region that matches your tenant, then paste the Client ID and Client Secret and click <strong>Save</strong>. Credentials are stored locally and never leave your machine.</p>
+          </div>
+        </li>
+        <li>
+          <span class="help-step-num">3</span>
+          <div class="help-step-body">
+            <h4>Search for a device</h4>
+            <p>Type a device name (full or partial), hostname, or NinjaOne numeric ID and press <strong>Enter</strong>. The device card up top shows its online status, plus the ID as a clickable badge that jumps straight to NinjaOne.</p>
+          </div>
+        </li>
+        <li>
+          <span class="help-step-num">4</span>
+          <div class="help-step-body">
+            <h4>Narrow down the results</h4>
+            <p>Sort by any column header. Use the <strong>Filter</strong> box to match by name, publisher, or version. Hit <strong>Hide Microsoft</strong> to suppress first-party Windows components and focus on user software.</p>
+          </div>
+        </li>
+        <li>
+          <span class="help-step-num">5</span>
+          <div class="help-step-body">
+            <h4>Export or paste</h4>
+            <p>Click <strong>Export CSV</strong> for a spreadsheet, or <strong>Copy as HTML</strong> to grab a formatted HTML table — paste it directly into a ticket note, email, or document and the table renders as-is.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="help-section">
+      <h3 class="help-h">Tips &amp; shortcuts</h3>
+      <ul class="help-tip-list">
+        <li><span><strong>Ctrl + K</strong> or <strong>/</strong> jumps to the search box from anywhere.</span></li>
+        <li><span><strong>Esc</strong> clears the active filter or closes the recent-devices menu.</span></li>
+        <li><span>Click the <strong>clock icon</strong> in the search box for your last 10 devices.</span></li>
+        <li><span>Click the device <strong>ID badge</strong> to open the device page in NinjaOne.</span></li>
+        <li><span>Toggle the <strong>sun / moon</strong> icon for dark or light theme — it persists.</span></li>
+        <li><span><strong>Refresh</strong> re-runs the last search without retyping.</span></li>
+      </ul>
+    </section>
+
+    <section class="help-section">
+      <h3 class="help-h">Good to know</h3>
+      <div class="help-ref">
+        <p><strong>Credentials</strong> live in <code>%APPDATA%\NinjaSoftwareLookup\config.json</code>. They're preserved if you uninstall and reinstall — only the embedded browser profile is cleaned up.</p>
+        <p><strong>Region</strong> matters: pick the NinjaOne endpoint that matches your tenant (US, EU, CA, OC). The wrong region returns 401 even with valid credentials.</p>
+        <p><strong>Antivirus blocking?</strong> See <code>TRUSTING-AV.md</code> in the install folder for Trend Vision One and Defender allowlist instructions.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer id="statusbar" class="glass">Ready.</footer>
+
+<!-- Settings dialog -->
+<div id="settingsDlg" class="dlg hidden" role="dialog" aria-modal="true">
+  <div class="dlg-card glass">
+    <h2>NinjaOne API Credentials</h2>
+    <p class="hint">
+      In NinjaOne, go to <strong>Administration → Apps → API → Add</strong> to create a
+      machine-to-machine app with the <em>monitoring</em> scope and <em>Client Credentials</em>
+      grant type. Paste the generated Client ID and Client Secret below.
+    </p>
+
+    <label>Region
+      <select id="region"></select>
+    </label>
+
+    <label>Client ID
+      <input id="clientId" type="text" autocomplete="off" />
+    </label>
+
+    <label>Client Secret
+      <input id="clientSecret" type="password" autocomplete="off" placeholder="(leave blank to keep existing)" />
+    </label>
+
+    <div class="dlg-actions">
+      <button id="cancelSettings" class="btn btn-ghost">Cancel</button>
+      <button id="saveSettings" class="btn btn-primary">Save</button>
+    </div>
+  </div>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>NinjaOne Software Lookup — Overview</title>
+<style>
+  :root {
+    --accent:        #F26A21;
+    --accent-2:      #FF8A3D;
+    --accent-deep:   #C24E10;
+    --accent-soft:   rgba(242, 106, 33, 0.10);
+    --bg-base:       #FBF3EA;
+    --bg-grad-1:     #FFD8B8;
+    --bg-grad-2:     #FFE9D2;
+    --bg-grad-3:     #FFFAF4;
+    --orb-1:         rgba(255, 138, 61, 0.55);
+    --orb-2:         rgba(255, 175, 110, 0.45);
+    --orb-3:         rgba(255, 110, 60, 0.35);
+    --glass-bg:      rgba(255, 255, 255, 0.55);
+    --glass-bg-strong: rgba(255, 255, 255, 0.78);
+    --glass-border:  rgba(255, 255, 255, 0.65);
+    --glass-edge:    rgba(255, 255, 255, 0.9);
+    --glass-shadow:  0 8px 32px rgba(176, 70, 14, 0.12),
+                     0 2px 6px  rgba(176, 70, 14, 0.06);
+    --text:          #2A1A0E;
+    --text-soft:     #6B4A36;
+    --muted:         #8A6D58;
+    --hairline:      rgba(0, 0, 0, 0.08);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Variable", "Segoe UI",
+                 "Inter", system-ui, sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    background:
+      radial-gradient(1200px 700px at 80% -10%, var(--bg-grad-1) 0%, transparent 55%),
+      radial-gradient(900px  600px at -10% 100%, var(--bg-grad-2) 0%, transparent 50%),
+      linear-gradient(180deg, var(--bg-grad-3) 0%, var(--bg-base) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Background orbs */
+  .bg-decor { position: fixed; inset: 0; pointer-events: none; z-index: -1; overflow: hidden; }
+  .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.85; }
+  .orb-1 { width: 520px; height: 520px; top: -120px; right: -80px; background: var(--orb-1); }
+  .orb-2 { width: 460px; height: 460px; bottom: -140px; left: -120px; background: var(--orb-2); }
+  .orb-3 { width: 320px; height: 320px; top: 40%; left: 55%; background: var(--orb-3); }
+
+  /* Glass primitive */
+  .glass {
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+            backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    position: relative;
+  }
+  .glass::before {
+    content: ""; position: absolute; inset: 0; border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(180deg, var(--glass-edge) 0%, transparent 22%);
+    opacity: 0.55; mix-blend-mode: overlay;
+  }
+
+  /* Top hero */
+  .hero {
+    position: relative;
+    padding: 70px 24px 60px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-logo {
+    width: 78px; height: 78px;
+    border-radius: 22px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 60%, #FF7A29 100%);
+    color: white;
+    box-shadow: 0 18px 40px rgba(242, 106, 33, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-size: 46px;
+    margin: 0 0 12px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #2A1A0E 0%, #C24E10 100%);
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+  }
+  .hero p.lead {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 18px;
+    color: var(--text-soft);
+    line-height: 1.55;
+  }
+  .hero .tag-row {
+    display: inline-flex; gap: 8px; flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 26px;
+  }
+  .tag {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    color: var(--accent-deep);
+  }
+
+  main {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* Section */
+  section.block {
+    margin-top: 36px;
+    padding: 36px;
+    border-radius: 22px;
+  }
+  section.block h2 {
+    margin: 0 0 8px;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  section.block p.section-lead {
+    margin: 0 0 26px;
+    color: var(--text-soft);
+    font-size: 15.5px;
+    line-height: 1.6;
+    max-width: 800px;
+  }
+
+  /* Feature grid */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .feature {
+    padding: 22px;
+    border-radius: 16px;
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .feature:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(176, 70, 14, 0.10);
+  }
+  .feature-icon {
+    width: 40px; height: 40px;
+    border-radius: 11px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    color: white;
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 12px rgba(242, 106, 33, 0.30),
+                inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+  .feature h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    font-weight: 650;
+    letter-spacing: -0.005em;
+  }
+  .feature p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--text-soft);
+    line-height: 1.55;
+  }
+
+  /* Workflow / steps */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    counter-reset: stepc;
+  }
+  .step {
+    position: relative;
+    padding: 22px 22px 22px 28px;
+    border-radius: 16px;
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+  }
+  .step::before {
+    counter-increment: stepc;
+    content: counter(stepc);
+    position: absolute;
+    top: -14px; left: 16px;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    display: inline-flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 12px rgba(242, 106, 33, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+  .step h3 {
+    margin: 0 0 6px;
+    font-size: 15.5px;
+    font-weight: 650;
+  }
+  .step p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--text-soft);
+    line-height: 1.55;
+  }
+
+  /* App preview mockup */
+  .preview {
+    margin-top: 28px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 24px 64px rgba(176, 70, 14, 0.18),
+                0 4px 12px rgba(176, 70, 14, 0.08);
+  }
+  .preview-bar {
+    background: linear-gradient(135deg, #FF8A3D 0%, #F26A21 45%, #D85614 100%);
+    color: white;
+    padding: 12px 18px;
+    display: flex; align-items: center; gap: 12px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .preview-bar .traffic {
+    display: inline-flex; gap: 6px;
+  }
+  .preview-bar .traffic span {
+    width: 11px; height: 11px; border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  }
+  .preview-bar .preview-title { flex: 1; opacity: 0.95; }
+  .preview-bar .preview-mini { font-size: 11.5px; opacity: 0.85; letter-spacing: 0.08em; text-transform: uppercase; }
+  .preview-body {
+    padding: 18px;
+    background: #FFFAF4;
+  }
+  .mock-search {
+    display: flex; gap: 8px; margin-bottom: 12px;
+  }
+  .mock-search input-like {
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: white;
+    border: 1px solid #EEE2D3;
+    color: #8A6D58;
+    font-size: 13.5px;
+  }
+  .mock-search .btn-mock {
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    color: white;
+    font-weight: 600;
+    font-size: 13.5px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+  .mock-search .btn-mock-glass {
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: white;
+    border: 1px solid #EEE2D3;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 13.5px;
+  }
+  .mock-device {
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: white;
+    border: 1px solid #F1E5D5;
+    margin-bottom: 12px;
+  }
+  .mock-device-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+  .mock-device-name { font-weight: 650; font-size: 15px; }
+  .mock-status {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 999px;
+    background: rgba(45, 165, 95, 0.16); color: #1F8048;
+    border: 1px solid rgba(45, 165, 95, 0.30);
+  }
+  .mock-status::before {
+    content: ""; width: 7px; height: 7px; border-radius: 50%;
+    background: #2DA55F;
+  }
+  .mock-id {
+    font-size: 12px;
+    color: var(--accent-deep);
+    background: var(--accent-soft);
+    padding: 3px 9px; border-radius: 6px;
+    font-family: ui-monospace, Consolas, monospace;
+  }
+  .mock-facts {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px 16px;
+  }
+  .mock-fact-label {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted); font-weight: 600;
+  }
+  .mock-fact-value { font-size: 13px; color: var(--text); }
+  .mock-table {
+    border-radius: 12px; overflow: hidden;
+    border: 1px solid #F1E5D5;
+  }
+  .mock-table table { width: 100%; border-collapse: collapse; background: white; }
+  .mock-table th {
+    text-align: left;
+    background: linear-gradient(180deg, rgba(242, 106, 33, 0.92), rgba(194, 78, 16, 0.92));
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 9px 12px;
+  }
+  .mock-table td {
+    padding: 9px 12px;
+    border-top: 1px solid #F4E8D8;
+    font-size: 13px;
+  }
+  .mock-table tr:nth-child(odd) td { background: rgba(255, 250, 244, 0.6); }
+
+  /* Shortcuts */
+  .shortcut-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .shortcut {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+  }
+  .shortcut-label { font-size: 13.5px; color: var(--text); }
+  .kbd {
+    display: inline-flex; gap: 4px;
+  }
+  .kbd kbd {
+    font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: white;
+    border: 1px solid #E8D8C5;
+    border-bottom-width: 2px;
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* Setup callout */
+  .setup-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .setup-card {
+    padding: 22px;
+    border-radius: 16px;
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+  }
+  .setup-card h3 {
+    margin: 0 0 8px;
+    font-size: 15.5px;
+    font-weight: 650;
+  }
+  .setup-card ol, .setup-card ul {
+    margin: 8px 0 0; padding-left: 18px;
+    font-size: 13.5px; color: var(--text-soft); line-height: 1.7;
+  }
+  code.inline {
+    font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+    font-size: 12.5px;
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    padding: 2px 6px;
+    border-radius: 5px;
+  }
+
+  /* Footer */
+  footer.page-footer {
+    margin-top: 50px;
+    padding: 24px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12.5px;
+  }
+  footer.page-footer strong { color: var(--text-soft); }
+
+  @media (max-width: 640px) {
+    .hero { padding: 50px 16px 40px; }
+    .hero h1 { font-size: 34px; }
+    section.block { padding: 26px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-decor" aria-hidden="true">
+  <span class="orb orb-1"></span>
+  <span class="orb orb-2"></span>
+  <span class="orb orb-3"></span>
+</div>
+
+<header class="hero">
+  <div class="hero-logo">
+    <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+  </div>
+  <h1>NinjaOne Software Lookup</h1>
+  <p class="lead">
+    A fast, focused desktop tool for pulling a device's installed software list out of
+    NinjaOne. Search, filter, sort, and paste a clean inventory table into a ticket,
+    email, or document in seconds.
+  </p>
+  <div class="tag-row">
+    <span class="tag">Windows desktop</span>
+    <span class="tag">Go + WebView</span>
+    <span class="tag">NinjaOne API</span>
+    <span class="tag">Rich-text clipboard</span>
+    <span class="tag">Light & dark themes</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- Live preview mockup -->
+  <section class="block glass">
+    <h2>At a glance</h2>
+    <p class="section-lead">
+      A single-window app that opens to a search box and gets you to a clean device
+      inventory in two clicks. No menus, no nested dashboards.
+    </p>
+
+    <div class="preview">
+      <div class="preview-bar">
+        <span class="traffic"><span></span><span></span><span></span></span>
+        <span class="preview-title">NinjaOne Software Lookup</span>
+        <span class="preview-mini">Device Software Inventory</span>
+      </div>
+      <div class="preview-body">
+        <div class="mock-search">
+          <div class="btn-mock-glass" style="flex:1;">🔍&nbsp; LAPTOP-ACCT-04</div>
+          <div class="btn-mock">Search</div>
+          <div class="btn-mock-glass">↻ Refresh</div>
+          <div class="btn-mock-glass">▦ Hide Microsoft</div>
+          <div class="btn-mock-glass">⤓ Export CSV</div>
+          <div class="btn-mock-glass">⧉ Copy as HTML</div>
+        </div>
+
+        <div class="mock-device">
+          <div class="mock-device-head">
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+              <span class="mock-device-name">LAPTOP-ACCT-04</span>
+              <span class="mock-status">Online</span>
+            </div>
+            <span class="mock-id">ID&nbsp; #28471 ↗</span>
+          </div>
+          <div class="mock-facts">
+            <div>
+              <div class="mock-fact-label">Organization</div>
+              <div class="mock-fact-value">Acme Manufacturing</div>
+            </div>
+            <div>
+              <div class="mock-fact-label">Location</div>
+              <div class="mock-fact-value">HQ — 4th Floor</div>
+            </div>
+            <div>
+              <div class="mock-fact-label">Type</div>
+              <div class="mock-fact-value">Windows Workstation</div>
+            </div>
+            <div>
+              <div class="mock-fact-label">Last Contact</div>
+              <div class="mock-fact-value">3 minutes ago</div>
+            </div>
+            <div>
+              <div class="mock-fact-label">Last User</div>
+              <div class="mock-fact-value">ACME\\jsmith</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mock-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Software ▲</th>
+                <th>Version</th>
+                <th>Publisher</th>
+                <th>Installed</th>
+                <th style="text-align:right">Size (MB)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Adobe Acrobat DC</td><td>23.006.20320</td><td>Adobe Inc.</td><td>2024-11-14</td><td style="text-align:right">612.4</td></tr>
+              <tr><td>Google Chrome</td><td>132.0.6834.110</td><td>Google LLC</td><td>2026-04-22</td><td style="text-align:right">414.0</td></tr>
+              <tr><td>NinjaOne Agent</td><td>5.7.4</td><td>NinjaOne, LLC</td><td>2025-09-03</td><td style="text-align:right">82.1</td></tr>
+              <tr><td>QuickBooks Desktop 2024</td><td>34.0.4001.1</td><td>Intuit Inc.</td><td>2025-02-19</td><td style="text-align:right">1,840.0</td></tr>
+              <tr><td>Zoom</td><td>6.2.10</td><td>Zoom Video Communications</td><td>2026-03-08</td><td style="text-align:right">298.6</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="block glass">
+    <h2>What it does</h2>
+    <p class="section-lead">
+      Everything a technician needs to look up software on a NinjaOne device and hand
+      that information off — without bouncing between NinjaOne's web UI and a ticket.
+    </p>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <h3>Search by name or ID</h3>
+        <p>Type a hostname, display name, or NinjaOne device ID. The app resolves it against the NinjaOne API and pulls the device record.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <h3>Device info card</h3>
+        <p>Organization, location, last contact, last logged-in user, online/offline status, plus a one-click deep link to open the device in NinjaOne.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        </div>
+        <h3>Live filter &amp; sort</h3>
+        <p>Filter by name, publisher, or version. Sort any column. A "Hide Microsoft" toggle strips out first-party Windows components so third-party apps stand out.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </div>
+        <h3>Copy as HTML</h3>
+        <p>One click produces a richly-formatted HTML table that pastes cleanly into ticket systems, email clients, or documents — defensive markup keeps it readable in both light and dark editor themes.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </div>
+        <h3>CSV export</h3>
+        <p>Drop the visible result set straight to a spreadsheet — useful for audits, license reconciliation, or sending raw data to a vendor.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+        </div>
+        <h3>Recent devices</h3>
+        <p>The last ten lookups stick around in a dropdown next to the search box, so re-checking a machine takes one click instead of retyping the name.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </div>
+        <h3>Light &amp; dark themes</h3>
+        <p>A liquid-glass interface that follows your OS preference, with brand-orange accents that tint the window title bar in app mode.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M3 9h18"/></svg>
+        </div>
+        <h3>Keyboard-friendly</h3>
+        <p>Search with <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>, jump to the filter with <span class="kbd"><kbd>/</kbd></span>, dismiss any dialog with <span class="kbd"><kbd>Esc</kbd></span>.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h3>Credentials stored locally</h3>
+        <p>API client ID and secret stay on your machine. The browser front-end never sees the secret — only the Go backend uses it to mint OAuth tokens.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="block glass">
+    <h2>How it works</h2>
+    <p class="section-lead">
+      A small Go binary serves a local web UI on a random port and embeds it in a Chrome
+      app window. When the window closes, the Go process shuts down — no background
+      services, no tray icons, nothing left running.
+    </p>
+
+    <div class="steps">
+      <div class="step">
+        <h3>Type a device</h3>
+        <p>Enter a hostname, display name, or numeric NinjaOne ID. Press Enter or click Search.</p>
+      </div>
+      <div class="step">
+        <h3>Auth &amp; lookup</h3>
+        <p>The backend exchanges your client credentials for an OAuth token, then queries NinjaOne for the matching device.</p>
+      </div>
+      <div class="step">
+        <h3>Pull software list</h3>
+        <p>The device's installed-software inventory is fetched in a single API call and streamed back to the UI as JSON.</p>
+      </div>
+      <div class="step">
+        <h3>Filter &amp; hand off</h3>
+        <p>Apply filters or sort, then export to CSV or copy a formatted HTML table straight to a ticket, email, or document — both formatted for the destination.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Keyboard shortcuts -->
+  <section class="block glass">
+    <h2>Keyboard shortcuts</h2>
+    <p class="section-lead">Small things that compound across a hundred lookups a week.</p>
+
+    <div class="shortcut-grid">
+      <div class="shortcut">
+        <span class="shortcut-label">Focus the search box</span>
+        <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+      </div>
+      <div class="shortcut">
+        <span class="shortcut-label">Run search</span>
+        <span class="kbd"><kbd>Enter</kbd></span>
+      </div>
+      <div class="shortcut">
+        <span class="shortcut-label">Focus the filter</span>
+        <span class="kbd"><kbd>/</kbd></span>
+      </div>
+      <div class="shortcut">
+        <span class="shortcut-label">Sort a column</span>
+        <span class="kbd"><kbd>Click</kbd><kbd>Header</kbd></span>
+      </div>
+      <div class="shortcut">
+        <span class="shortcut-label">Close dialog / menu</span>
+        <span class="kbd"><kbd>Esc</kbd></span>
+      </div>
+      <div class="shortcut">
+        <span class="shortcut-label">Re-run last search</span>
+        <span class="kbd"><kbd>Refresh</kbd></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Setup -->
+  <section class="block glass">
+    <h2>Getting set up</h2>
+    <p class="section-lead">
+      The first time you launch the app it opens the Settings dialog and asks for your
+      NinjaOne API credentials. After that, it remembers them.
+    </p>
+
+    <div class="setup-grid">
+      <div class="setup-card">
+        <h3>1. Create an API app in NinjaOne</h3>
+        <ol>
+          <li>Administration → Apps → API → Add</li>
+          <li>Grant type: <code class="inline">Client Credentials</code></li>
+          <li>Scope: <code class="inline">monitoring</code></li>
+          <li>Save and copy the Client ID and Client Secret</li>
+        </ol>
+      </div>
+      <div class="setup-card">
+        <h3>2. Paste credentials</h3>
+        <ul>
+          <li>Pick your NinjaOne region (US, EU, CA, OC, US2)</li>
+          <li>Paste the Client ID and Client Secret</li>
+          <li>Click Save — credentials are stored locally only</li>
+        </ul>
+      </div>
+      <div class="setup-card">
+        <h3>3. Search away</h3>
+        <ul>
+          <li>Type any hostname, display name, or device ID</li>
+          <li>Use the device ID badge to deep-link into NinjaOne</li>
+          <li>Filter, sort, export to CSV, or copy as HTML</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="page-footer">
+  <p><strong>NinjaOne Software Lookup</strong> — desktop companion for the NinjaOne API. Built for technicians and admins, optimized for ticketing, documentation, and audit workflows.</p>
+</footer>
+
+</body>
+</html>
