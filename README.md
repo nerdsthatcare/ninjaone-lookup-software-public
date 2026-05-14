@@ -45,6 +45,8 @@ A small Go binary serves a local web UI on a random port and embeds it in a Chro
 
 ## Setup
 
+<img width="1103" height="327" alt="image" src="https://github.com/user-attachments/assets/ecafce32-818d-4ceb-8d3e-92fcf90ae786" />
+
 ### 1. Create a NinjaOne API app
 
 In NinjaOne: **Administration → Apps → API → Add**
