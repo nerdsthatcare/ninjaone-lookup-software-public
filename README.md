@@ -1,7 +1,5 @@
 <img width="833" height="347" alt="image" src="https://github.com/user-attachments/assets/f9885ea5-9479-4db9-93f2-44467639b5c8" />
 
-A fast, focused desktop tool for pulling a device's installed software list out of NinjaOne. Search, filter, sort, and paste a clean inventory table into a ticket, email, or document in seconds.
-
 ![Windows](https://img.shields.io/badge/platform-Windows-0078D6)
 ![Go](https://img.shields.io/badge/backend-Go-00ADD8)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -19,6 +17,8 @@ A fast, focused desktop tool for pulling a device's installed software list out 
 - 🕘 **Recent devices** — the last ten lookups stay in a dropdown for quick re-checking
 - 🌗 **Light & dark themes** — liquid-glass interface with brand-orange accents
 - ⌨️ **Keyboard-friendly** — `Ctrl+K` to search, `/` to filter, `Esc` to dismiss
+  
+<img width="1108" height="820" alt="image" src="https://github.com/user-attachments/assets/546b18cb-5359-46cc-a4ba-a443c63284bf" />
 
 ---
 
